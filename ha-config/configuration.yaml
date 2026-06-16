@@ -1,0 +1,29 @@
+default_config:
+
+homeassistant:
+  name: SmartHVAC
+  latitude: 42.0
+  longitude: 21.0
+  elevation: 250
+  unit_system: metric
+  time_zone: Europe/Belgrade
+  packages: !include_dir_named 'packages'
+mqtt:
+  broker: 127.0.0.1
+  port: 1883
+logger:
+  default: info
+weather:
+- platform: open_meteo
+  name: Open-Meteo Forecast
+  latitude: 42.0
+  longitude: 21.0
+sensor:
+- platform: openweathermap
+  api_key: REPLACE_WITH_OPENWEATHER_API_KEY
+  latitude: 42.0
+  longitude: 21.0
+  monitored_conditions:
+  - air_quality_index
+automation: !include 'automations.yaml'
+climate: []

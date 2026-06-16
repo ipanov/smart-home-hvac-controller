@@ -1,0 +1,15 @@
+template:
+- sensor:
+  - name: Outside Temperature
+    unique_id: outside_temperature
+    state: '{{ state_attr(''weather.open_meteo_forecast'', ''temperature'') }}'
+    unit_of_measurement: °C
+  - name: Outside Humidity
+    unique_id: outside_humidity
+    state: '{{ state_attr(''weather.open_meteo_forecast'', ''humidity'') }}'
+    unit_of_measurement: '%'
+  - name: Weather Forecast High
+    unique_id: weather_forecast_high
+    state: '{{ state_attr(''weather.open_meteo_forecast'', ''temperature'') | float(0)
+      + 5 }}'
+    unit_of_measurement: °C

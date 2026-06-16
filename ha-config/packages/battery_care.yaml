@@ -1,0 +1,19 @@
+automation:
+- id: battery_care_report
+  alias: Report battery care status
+  trigger:
+  - platform: time_pattern
+    minutes: /5
+  condition:
+  - condition: or
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.phone_battery_level
+      above: 80
+    - condition: numeric_state
+      entity_id: sensor.phone_battery_level
+      below: 20
+  action:
+  - service: notify.mobile_app_sm_g950f
+    data:
+      message: 'Battery care alert: {{ states(''sensor.phone_battery_level'') }}%'

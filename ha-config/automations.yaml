@@ -1,0 +1,22 @@
+- id: safety_turn_off_ac
+  alias: Turn off AC if inside temperature below 18°C
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.inside_temperature
+    below: 18
+  action:
+  - service: climate.turn_off
+    target:
+      entity_id: climate.ac_unit
+- id: auto_purifier_high
+  alias: Turn purifier to high when PM2.5 above 35
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.openweathermap_pm25
+    above: 35
+  action:
+  - service: fan.set_percentage
+    target:
+      entity_id: fan.purifier
+    data:
+      percentage: 100

@@ -1,0 +1,25 @@
+input_number:
+  hvac_target_temperature:
+    name: HVAC Target Temperature
+    min: 16
+    max: 30
+    step: 0.5
+    initial: 24
+  hvac_kp:
+    name: HVAC Kp
+    min: 0
+    max: 100
+    step: 0.1
+    initial: 1.0
+  hvac_ki:
+    name: HVAC Ki
+    min: 0
+    max: 100
+    step: 0.01
+    initial: 0.1
+  hvac_kd:
+    name: HVAC Kd
+    min: 0
+    max: 100
+    step: 0.1
+    initial: 0.5
