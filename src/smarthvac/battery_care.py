@@ -135,17 +135,22 @@ class BatteryCareLoop:
         self._controller = charge_controller
         self._battery_level_source = battery_level_source
 
-    def _get_battery_level(self) -> int:
-        level = self._battery_level_source()
+    def _get_battery_level(self, override: int | None = None) -> int:
+        level = override if override is not None else self._battery_level_source()
         if not isinstance(level, int) or not 0 <= level <= 100:
             raise BatteryCareError(
                 f"Invalid battery level: {level!r}; expected int in range 0-100"
             )
         return level
 
-    def tick(self) -> ChargeDecision:
-        """Evaluate thresholds and return the charge decision."""
-        level = self._get_battery_level()
+    def tick(self, battery_level: int | None = None) -> ChargeDecision:
+        """Evaluate thresholds and return the charge decision.
+
+        Args:
+            battery_level: Optional explicit battery level. When provided, it
+                overrides the configured battery level source for this tick.
+        """
+        level = self._get_battery_level(override=battery_level)
 
         if level >= self._config.upper_threshold:
             self._controller.disable_charging()
