@@ -1,0 +1,5 @@
+ha-config/.storage/
+ha-config/home-assistant.log*
+ha-config/secrets.yaml
+ha-config/known_devices.yaml
+mosquitto/
